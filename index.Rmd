@@ -1,9 +1,19 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "Data Science Portfolio"
+author: "Meggi Varnai"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
----
+output: bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+github-repo: 
+description: "This is my portfolio for ESS 580A7."
 
-# Down the rabbit-hole
+---
+ # Introduction {-}
+ This bookdown website is comprised of all assignments completed in ESS 580A7. 
+ 
+ ##View GitHub Code {-}
+
 

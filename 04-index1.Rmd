@@ -1,0 +1,175 @@
+---
+title: "LAGOS Spatial Analysis"
+author: "Meggi Varnai"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+
+```{r setup, include=FALSE}
+library(tidyverse) # Tidy packages
+library(sf) #Spatial package that can read and create shapefiles 
+library(mapview) #Interactive maps
+library(LAGOSNE) #Lots and lots of clean lake data
+library(USAboundaries) #USA states and counties
+library(ggthemes)
+library(ggpubr)
+
+```
+
+
+# LAGOS Analysis
+
+
+## Loading in data
+
+
+### First download and then specifically grab the locus (or site lat longs)
+
+```{r data-read, warning=FALSE}
+# #Lagos download script
+LAGOSNE::lagosne_get(dest_folder = LAGOSNE:::lagos_path())
+
+#Load in lagos
+lagos <- lagosne_load()
+
+#Grab the lake centroid info
+lake_centers <- lagos$locus
+
+```
+
+
+
+### Convert to spatial data
+```{r}
+#Look at the column names
+#names(lake_centers)
+
+#Look at the structure
+#str(lake_centers)
+
+#View the full dataset
+#View(lake_centers %>% slice(1:100))
+
+#st_as_sf, takes table and makes into spatial objects
+spatial_lakes <- st_as_sf(lake_centers,coords=c('nhd_long','nhd_lat'),
+                          crs=4326) %>% #crs is projection system. diff codes
+                          st_transform(2163) #transforming projection for map view
+
+#Subset for plotting
+subset_spatial <- spatial_lakes %>%
+  slice(1:100) 
+
+subset_baser <- spatial_lakes[1:100,]
+
+#Dynamic mapviewer
+mapview(subset_spatial)
+
+```
+
+
+### Subset to only Minnesota
+
+```{r}
+states <- us_states()
+
+#Plot all the states to check if they loaded
+#mapview(states)
+minnesota <- states %>%
+  filter(name == 'Minnesota') %>%
+  st_transform(2163)
+
+#Subset lakes based on spatial position
+minnesota_lakes <- spatial_lakes[minnesota,]
+
+#Plotting the first 1000 lakes
+minnesota_lakes %>%
+  arrange(-lake_area_ha) %>%
+    slice(1:1000) %>%
+  mapview(.,zcol = 'lake_area_ha')
+```
+
+
+
+# In-Class work
+
+
+## 1) Show a map outline of Iowa and Illinois (similar to Minnesota map upstream)
+
+```{r}
+#filtering out the states of interest
+Iowa <- states %>%
+  filter(name == 'Iowa') %>%
+  st_transform(2163)
+
+Illinois <- states %>%
+  filter(name == 'Illinois') %>%
+  st_transform(2163)
+
+#combining the two states and mapping them
+maps <- rbind(Iowa,Illinois)
+mapview(maps)
+```
+
+
+
+## 2) Subset LAGOS data to these sites, how many sites are in Illinois and Iowa combined? How does this compare to Minnesota?
+
+```{r}
+iowa_lakes<-spatial_lakes[Iowa,]
+
+illinois_lakes <- spatial_lakes[Illinois,]
+
+```
+A: There are 4,644 lakes in Iowa, and 11,822 lakes in Illinois for a combined total of 16,466 lakes. Minnesota has 29,038 lakes, almost double the amount in Iowa and Illinois. 
+
+## 3) What is the distribution of lake size in Iowa vs. Minnesota?
+
+- Here I want to see a histogram plot with lake size on x-axis and frequency on 
+y axis (check out geom_histogram)
+
+```{r}
+iowa_size <- iowa_lakes %>%
+  ggplot(aes(x=lake_area_ha))+
+  geom_histogram(bins=20,
+                 fill="cadetblue3",
+                 color= "lightblue3",
+                 alpha=0.5)+
+  scale_x_log10()+
+  theme_few()+
+  labs(x= 'Area (ha)', y= 'Count',title="Iowa Lake Size Histogram")
+
+illinois_size <- illinois_lakes %>%
+  ggplot(aes(x=lake_area_ha))+
+  geom_histogram(bins=20,
+                 fill="cadetblue3",
+                 color= "lightblue3",
+                 alpha=0.5)+
+  scale_x_log10()+
+  theme_few()+
+  labs(x= 'Area (ha)', y= 'Count',title="Illinois Lake Size Histogram")
+
+ggarrange(iowa_size,illinois_size, ncol=1, nrow=2)
+```
+
+
+## 4) Make an interactive plot of lakes in Iowa and Illinois and color them by lake area in hectares
+
+```{r}
+Iowa_Illinois_lakes <- rbind(iowa_lakes,illinois_lakes) 
+
+Iowa_Illinois_lakes %>%
+  arrange(-lake_area_ha) %>%
+  slice(1:1000) %>%
+  mapview(.,zcol='lake_area_ha')
+
+```
+
+
+## 5) What other data sources might we use to understand how reservoirs and natural lakes vary in size in these three states? 
+
+A: A dataset with lake depths would be beneficial when looking at lake size. This could potentially include the maximum, minimum, and average depth and would give us better information to the volume these lakes hold. 
+
