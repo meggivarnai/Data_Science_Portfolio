@@ -1,45 +1,29 @@
----
-title: "Hayman Fire Recovery"
-author: "Meggi Varnai"
-date: "`r format(Sys.Date(), '%B %d, %Y')`"
-output:
-  html_document: default
-  word_document: default
-  pdf_document: default
-  
-knit: (function(input, ...) {
-    rmarkdown::render(
-      input,
-      output_file = 'index',
-      output_dir='../'
-    )
-  })
----
+# Hayman Fire Recovery
 
+Working on manipulating data and visualizing it in different ways.
 
-```{r setup, warning=F,message=F, include=FALSE}
+```{r 02 library, warning=F,message=F, include=FALSE}
 library(tidyverse)
 library(tidyr)
 library(ggthemes)
 library(lubridate)
-# Now that we have learned how to munge (manipulate) data
-# and plot it, we will work on using these skills in new ways
-knitr::opts_knit$set(root.dir='..')
+library(here)
+
+#knitr::opts_knit$set(root.dir='..')
 ```
 
+Data read in
 
-```{r dataread, warning=F,message=F}
-####-----Reading in Data and Stacking it ----- ####
-#Reading in files
-files <- list.files('data',full.names=T)
+```{r 02 dataread, warning=F,message=F}
+
 #Read in individual data files
-ndmi <- read_csv(files[1]) %>% 
+ndmi <- read_csv("/Users/meggivarnai/Desktop/csu/Spring2022/DataScience/assignments/Data_Science_Portfolio_test/data/data2/hayman_ndmi.csv") %>% 
   rename(burned=2,unburned=3) %>%
   mutate(data='ndmi')
-ndsi <- read_csv(files[2]) %>% 
+ndsi <- read_csv("/Users/meggivarnai/Desktop/csu/Spring2022/DataScience/assignments/Data_Science_Portfolio_test/data/data2/hayman_ndsi.csv") %>% 
   rename(burned=2,unburned=3) %>%
   mutate(data='ndsi')
-ndvi <- read_csv(files[3])%>% 
+ndvi <- read_csv("/Users/meggivarnai/Desktop/csu/Spring2022/DataScience/assignments/Data_Science_Portfolio_test/data/data2/hayman_ndvi.csv")%>% 
   rename(burned=2,unburned=3) %>%
   mutate(data='ndvi')
 # Stack as a tidy dataset
@@ -50,15 +34,13 @@ full_long <- rbind(ndvi,ndmi,ndsi) %>%
 
 
 
-## Question 1) 
+## Correlations
 
-What is the correlation between NDVI and NDMI? - here I want you to
-convert the full_long dataset in to a wide dataset using the 
-function "spread" and then make a plot that shows the correlation as a
-function of if the site was burned or not (x axis should be ndmi)
-You should exclude winter months and focus on summer months
+### Between NDVI and NDMI. 
 
-```{r message=F, warning=F,fig.width=7,fig.height=7}
+What is the correlation between NDVI and NDMI? Convert the full_long dataset in to a wide dataset using the function "spread" and then make a plot that shows the correlation as a function of if the site was burned or not (x axis should be ndmi).
+
+```{r 02 correlation, message=F, warning=F,fig.width=7,fig.height=7}
 
 full_wide <- spread(full_long,key='data',value='value') %>%
   filter_if(is.numeric,all_vars(!is.na(.))) %>%
@@ -68,6 +50,7 @@ full_wide <- spread(full_long,key='data',value='value') %>%
 #create variable for summer months
 var.summer_months<- c(5,6,7,8)
 
+#filter data using months we want
 summer<-full_wide %>%
   filter(month %in% var.summer_months)
 
@@ -84,13 +67,11 @@ cor(summer$ndmi,summer$ndvi)
 
 A: Based off the plot, there is a positive correlation between ndmi and ndvi. I ran a correlation test and found that the correlation for summer months between NDMI and NDVI is 0.68. This initial analysis is not considering any other variables (ie burned vs unburned), which would be worth looking into to determine if there are stronger relationships present. 
 
-## Question 2 
+### Between average NDSI and average NDVI.
 
-2) What is the correlation between average NDSI (normalized
- snow index) for January - April and average NDVI for June-August?
-In other words, does the previous year's snow cover influence vegetation growth for the following summer?
+What is the correlation between average NDSI (normalized snow index) for January - April and average NDVI for June-August? In other words, does the previous year's snow cover influence vegetation growth for the following summer?
 
-```{r warning=F,message=F,fig.width=7,fig.height=7}
+```{r 02 avg correlation,warning=F,message=F,fig.width=7,fig.height=7}
 #variable ndsi months
 var.snow_months<-c(1,2,3,4)
 
@@ -124,14 +105,13 @@ ggplot(combined, aes(x=ndvi_avg, y=ndsi_avg,color=site))+
   theme(legend.position=c(0.2,0.8))
 
 ```
-When we are considering all sites and time frames, the data shows that there is low correlation between snow cover and vegetation growth, 0.18. This low correlation between the previous year's snow cover on vegetation growth for the following summer excludes several variables like burned and unburned, which on our plot we can see how that there is a difference between these variables. Our analysis also doesn't account for differences in runoff patterns due to elevation and slope that would impact the correlation between snow cover and vegetation growth. 
+A: When we are considering all sites and time frames, the data shows that there is low correlation between snow cover and vegetation growth, 0.18. This low correlation between the previous year's snow cover on vegetation growth for the following summer excludes several variables like burned and unburned, which on our plot we can see how that there is a difference between these variables. Our analysis also doesn't account for differences in runoff patterns due to elevation and slope that would impact the correlation between snow cover and vegetation growth. 
 
-## Q3
+### Pre- and post-burn and burned and unburned.
 
-How is the snow effect from question 2 different between pre- and post-burn
-and burned and unburned? 
+How is the snow effect from question 2 different between pre- and post-burn and burned and unburned? 
 
-```{r ,message=F,fig.width=7,fig.height=7}
+```{r 02 prepost comparison,message=F,fig.width=7,fig.height=7}
 #create dataframe on pre-and post 2002- hayman fire.
 preyears<-c(1984:2002)
 postyears<-c(2003:2019)
@@ -191,11 +171,12 @@ answers
 ```
 Based off our correlations, we see no relationship between ndsi vs ndvi when we consider pre and post fire, as well as unburned and burned. Other then Post, all other correlations are less than question 2. This alludes to other underlying variables impacting our values such as shifts in climate year to year, soil type, and runoff rates that could be influencing these relationships. 
 
-## Question 4
+## Maximum NDVI and NDSI values
 
-What month is the greenest month on average? 
+August is the greenest month on average.
 
-```{r, message=F}
+```{r 02 greeness, message=F}
+#filtering vegetation index and creating new column with averages. 
 green_avgmonth<-ndvi%>% 
   pivot_longer(
     cols= c("burned","unburned"),
@@ -208,17 +189,12 @@ green_avgmonth<-ndvi%>%
   filter(ndvi_avgmonth == max(ndvi_avgmonth))
 
 green_avgmonth
-
-
 ```
 
-A:August is the greenest month on average.
 
-## Question 5) 
-
-What month is the snowiest on average?
-
-```{r}
+January is the snowiest month on average. 
+```{r, 02 snowiness}
+#filtering snow index and creating new column with averages. 
 snow_avgmonth<-ndsi%>%
   pivot_longer(
     cols= c("burned","unburned"),
@@ -231,8 +207,5 @@ snow_avgmonth<-ndsi%>%
   filter(ndsi_avgmonth == max(ndsi_avgmonth))
 ```
 
-A: January is the snowiest month on average. 
 
-## Bonus Question: Redo all problems with `spread` and `gather` using modern tidyverse syntax.
 
-## Bonus Question: Use Climage Engine to pull the same data for the assignment, but updated with 2020/2021 data.

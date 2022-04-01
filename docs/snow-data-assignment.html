@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Snow Data Assignment | Data Science Portfolio</title>
+  <meta name="description" content="This is my portfolio for ESS 580A7." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Snow Data Assignment | Data Science Portfolio" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is my portfolio for ESS 580A7." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Snow Data Assignment | Data Science Portfolio" />
+  
+  <meta name="twitter:description" content="This is my portfolio for ESS 580A7." />
+  
+
+<meta name="author" content="Meggi Varnai" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="hayman-fire-recovery.html"/>
+<link rel="next" href="lagos-spatial-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">portfolio</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="2" data-path="poudre-river-dishcarge.html"><a href="poudre-river-dishcarge.html"><i class="fa fa-check"></i><b>2</b> Poudre River Dishcarge<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="poudre-river-dishcarge.html"><a href="poudre-river-dishcarge.html#cache-la-poudre-river"><i class="fa fa-check"></i><b>2.1</b> Cache la Poudre River<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="poudre-river-dishcarge.html"><a href="poudre-river-dishcarge.html#data-acquisition-and-plotting-tests"><i class="fa fa-check"></i><b>2.2</b> Data Acquisition and Plotting tests<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html"><i class="fa fa-check"></i><b>3</b> Hayman Fire Recovery<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#correlations"><i class="fa fa-check"></i><b>3.1</b> Correlations<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#between-ndvi-and-ndmi."><i class="fa fa-check"></i><b>3.1.1</b> Between NDVI and NDMI.<span></span></a></li>
+<li class="chapter" data-level="3.1.2" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#between-average-ndsi-and-average-ndvi."><i class="fa fa-check"></i><b>3.1.2</b> Between average NDSI and average NDVI.<span></span></a></li>
+<li class="chapter" data-level="3.1.3" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#pre--and-post-burn-and-burned-and-unburned."><i class="fa fa-check"></i><b>3.1.3</b> Pre- and post-burn and burned and unburned.<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="hayman-fire-recovery.html"><a href="hayman-fire-recovery.html#maximum-ndvi-and-ndsi-values"><i class="fa fa-check"></i><b>3.2</b> Maximum NDVI and NDSI values<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html"><i class="fa fa-check"></i><b>4</b> Snow Data Assignment<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#webscraping"><i class="fa fa-check"></i><b>4.1</b> Webscraping<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#data-download"><i class="fa fa-check"></i><b>4.1.1</b> Data Download<span></span></a></li>
+<li class="chapter" data-level="4.1.2" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#data-read-in"><i class="fa fa-check"></i><b>4.1.2</b> Data read-in<span></span></a></li>
+<li class="chapter" data-level="4.1.3" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#read-in-the-data-as-a-map-function"><i class="fa fa-check"></i><b>4.1.3</b> Read in the data as a map function<span></span></a></li>
+<li class="chapter" data-level="4.1.4" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#plot-snow-data"><i class="fa fa-check"></i><b>4.1.4</b> Plot snow data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#extract-the-meteorological-data-urls.-here-we-want-you-to-use-the-rvest-package-to-get-the-urls-for-the-sasp-forcing-and-sbsp_forcing-meteorological-datasets."><i class="fa fa-check"></i><b>4.2</b> Extract the meteorological data URLs. Here we want you to use the <code>rvest</code> package to get the URLs for the <code>SASP forcing</code> and <code>SBSP_forcing</code> meteorological datasets.<span></span></a></li>
+<li class="chapter" data-level="4.3" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#webscraping-assignment"><i class="fa fa-check"></i><b>4.3</b> Webscraping Assignment<span></span></a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#data-download-1"><i class="fa fa-check"></i><b>4.3.1</b> Data Download<span></span></a></li>
+<li class="chapter" data-level="4.3.2" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#extract-meterorological-data"><i class="fa fa-check"></i><b>4.3.2</b> Extract meterorological data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#line-plot-of-mean-temperature"><i class="fa fa-check"></i><b>4.4</b> Line plot of mean temperature<span></span></a></li>
+<li class="chapter" data-level="4.5" data-path="snow-data-assignment.html"><a href="snow-data-assignment.html#monthly-average-temperatures"><i class="fa fa-check"></i><b>4.5</b> Monthly average temperatures<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lagos-spatial-analysis.html"><a href="lagos-spatial-analysis.html"><i class="fa fa-check"></i><b>5</b> LAGOS Spatial Analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="lagos-spatial-analysis.html"><a href="lagos-spatial-analysis.html#convert-to-spatial-data"><i class="fa fa-check"></i><b>5.1</b> Convert to spatial data<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="lagos-spatial-analysis.html"><a href="lagos-spatial-analysis.html#subset-to-only-minnesota"><i class="fa fa-check"></i><b>5.1.1</b> Subset to only Minnesota<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="lagos-spatial-analysis.html"><a href="lagos-spatial-analysis.html#show-a-map-outline-of-iowa-and-illinois-similar-to-minnesota-map-upstream"><i class="fa fa-check"></i><b>5.2</b> Show a map outline of Iowa and Illinois (similar to Minnesota map upstream)<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="lagos-spatial-analysis.html"><a href="lagos-spatial-analysis.html#subset-lagos-data-to-these-sites-how-many-sites-are-in-illinois-and-iowa-combined-how-does-this-compare-to-minnesota"><i class="fa fa-check"></i><b>5.3</b> Subset LAGOS data to these sites, how many sites are in Illinois and Iowa combined? How does this compare to Minnesota?<span></span></a></li>
+<li class="chapter" data-level="5.4" data-path="lagos-spatial-analysis.html"><a href="lagos-spatial-analysis.html#what-is-the-distribution-of-lake-size-in-iowa-vs.-minnesota"><i class="fa fa-check"></i><b>5.4</b> What is the distribution of lake size in Iowa vs. Minnesota?<span></span></a></li>
+<li class="chapter" data-level="5.5" data-path="lagos-spatial-analysis.html"><a href="lagos-spatial-analysis.html#make-an-interactive-plot-of-lakes-in-iowa-and-illinois-and-color-them-by-lake-area-in-hectares"><i class="fa fa-check"></i><b>5.5</b> Make an interactive plot of lakes in Iowa and Illinois and color them by lake area in hectares<span></span></a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="lagos-spatial-analysis.html"><a href="lagos-spatial-analysis.html#what-other-data-sources-might-we-use-to-understand-how-reservoirs-and-natural-lakes-vary-in-size-in-these-three-states"><i class="fa fa-check"></i><b>5.5.1</b> What other data sources might we use to understand how reservoirs and natural lakes vary in size in these three states?<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Portfolio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="snow-data-assignment" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Snow Data Assignment<a href="snow-data-assignment.html#snow-data-assignment" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This assignment focuses on web scraping, functions, and iteration using snow data from the Center for Snow and Avalance Studies <a href="https://snowstudies.org/archived-data/">Website</a>. For simple web scraping, we want to programatically download for three sites. We don’t know much about these sites, but they contain incredibly rich snow, temperature, and precipitation data.</p>
+<div id="webscraping" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Webscraping<a href="snow-data-assignment.html#webscraping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Reading an html, extract CSV links from webpage</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="snow-data-assignment.html#cb1-1" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">&lt;-</span> <span class="st">&#39;https://snowstudies.org/archived-data/&#39;</span></span>
+<span id="cb1-2"><a href="snow-data-assignment.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="snow-data-assignment.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Read the web url</span></span>
+<span id="cb1-4"><a href="snow-data-assignment.html#cb1-4" aria-hidden="true" tabindex="-1"></a>webpage <span class="ot">&lt;-</span> <span class="fu">read_html</span>(site_url)</span>
+<span id="cb1-5"><a href="snow-data-assignment.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="snow-data-assignment.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#See if we can extract tables and get the data that way</span></span>
+<span id="cb1-7"><a href="snow-data-assignment.html#cb1-7" aria-hidden="true" tabindex="-1"></a>tables <span class="ot">&lt;-</span> webpage <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="snow-data-assignment.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&#39;table&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="snow-data-assignment.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  magrittr<span class="sc">::</span><span class="fu">extract2</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="snow-data-assignment.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>(<span class="at">fill =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-11"><a href="snow-data-assignment.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#That didn&#39;t work, so let&#39;s try a different approach</span></span>
+<span id="cb1-12"><a href="snow-data-assignment.html#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="snow-data-assignment.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract only weblinks and then the URLs!</span></span>
+<span id="cb1-14"><a href="snow-data-assignment.html#cb1-14" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> webpage <span class="sc">%&gt;%</span></span>
+<span id="cb1-15"><a href="snow-data-assignment.html#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&#39;a&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="snow-data-assignment.html#cb1-16" aria-hidden="true" tabindex="-1"></a>  .[<span class="fu">grepl</span>(<span class="st">&#39;24hr&#39;</span>,.)] <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href="snow-data-assignment.html#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">&#39;href&#39;</span>)</span></code></pre></div>
+<div id="data-download" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Data Download<a href="snow-data-assignment.html#data-download" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Download data in a for loop</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="snow-data-assignment.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Grab only the name of the file by splitting out on forward slashes</span></span>
+<span id="cb2-2"><a href="snow-data-assignment.html#cb2-2" aria-hidden="true" tabindex="-1"></a>splits <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(links,<span class="st">&#39;/&#39;</span>,<span class="dv">8</span>)</span>
+<span id="cb2-3"><a href="snow-data-assignment.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="snow-data-assignment.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Keep only the 8th column</span></span>
+<span id="cb2-5"><a href="snow-data-assignment.html#cb2-5" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> splits[,<span class="dv">8</span>] </span>
+<span id="cb2-6"><a href="snow-data-assignment.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="snow-data-assignment.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#generate a file list for where the data goes</span></span>
+<span id="cb2-8"><a href="snow-data-assignment.html#cb2-8" aria-hidden="true" tabindex="-1"></a>file_names <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&#39;data/data3/&#39;</span>,dataset)</span>
+<span id="cb2-9"><a href="snow-data-assignment.html#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="snow-data-assignment.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>){</span>
+<span id="cb2-11"><a href="snow-data-assignment.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">download.file</span>(links[i],<span class="at">destfile=</span>file_names[i])</span>
+<span id="cb2-12"><a href="snow-data-assignment.html#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-13"><a href="snow-data-assignment.html#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="snow-data-assignment.html#cb2-14" aria-hidden="true" tabindex="-1"></a>downloaded <span class="ot">&lt;-</span> <span class="fu">file.exists</span>(file_names)</span>
+<span id="cb2-15"><a href="snow-data-assignment.html#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="snow-data-assignment.html#cb2-16" aria-hidden="true" tabindex="-1"></a>evaluate <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">all</span>(downloaded)</span></code></pre></div>
+<p>Download data in a map</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="snow-data-assignment.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Map version of the same for loop (downloading 3 files)</span></span>
+<span id="cb3-2"><a href="snow-data-assignment.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(evaluate <span class="sc">==</span> T){</span>
+<span id="cb3-3"><a href="snow-data-assignment.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map2</span>(links[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],file_names[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],download.file)</span>
+<span id="cb3-4"><a href="snow-data-assignment.html#cb3-4" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{<span class="fu">print</span>(<span class="st">&#39;data already downloaded&#39;</span>)}</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 0
+## 
+## [[2]]
+## [1] 0
+## 
+## [[3]]
+## [1] 0</code></pre>
+</div>
+<div id="data-read-in" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Data read-in<a href="snow-data-assignment.html#data-read-in" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Read in just the snow data as a loop</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="snow-data-assignment.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pattern matching to only keep certain files</span></span>
+<span id="cb5-2"><a href="snow-data-assignment.html#cb5-2" aria-hidden="true" tabindex="-1"></a>snow_files <span class="ot">&lt;-</span> file_names <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="snow-data-assignment.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  .[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&#39;SG_24&#39;</span>,.)] <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="snow-data-assignment.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  .[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&#39;PTSP&#39;</span>,.)]</span>
+<span id="cb5-5"><a href="snow-data-assignment.html#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="snow-data-assignment.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#empty_data &lt;- list()</span></span>
+<span id="cb5-7"><a href="snow-data-assignment.html#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="snow-data-assignment.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># snow_data &lt;- for(i in 1:length(snow_files)){</span></span>
+<span id="cb5-9"><a href="snow-data-assignment.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   empty_data[[i]] &lt;- read_csv(snow_files[i]) %&gt;%</span></span>
+<span id="cb5-10"><a href="snow-data-assignment.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     select(Year,DOY,Sno_Height_M)</span></span>
+<span id="cb5-11"><a href="snow-data-assignment.html#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb5-12"><a href="snow-data-assignment.html#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="snow-data-assignment.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#snow_data_full &lt;- do.call(&#39;rbind&#39;,empty_data)</span></span>
+<span id="cb5-14"><a href="snow-data-assignment.html#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="snow-data-assignment.html#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(snow_data_full)</span></span></code></pre></div>
+</div>
+<div id="read-in-the-data-as-a-map-function" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Read in the data as a map function<a href="snow-data-assignment.html#read-in-the-data-as-a-map-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="snow-data-assignment.html#cb6-1" aria-hidden="true" tabindex="-1"></a>our_snow_reader <span class="ot">&lt;-</span> <span class="cf">function</span>(file){</span>
+<span id="cb6-2"><a href="snow-data-assignment.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  name <span class="ot">=</span> <span class="fu">str_split_fixed</span>(file,<span class="st">&#39;/&#39;</span>,<span class="dv">2</span>)[,<span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="snow-data-assignment.html#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gsub</span>(<span class="st">&#39;_24hr.csv&#39;</span>,<span class="st">&#39;&#39;</span>,.)</span>
+<span id="cb6-4"><a href="snow-data-assignment.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(file) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="snow-data-assignment.html#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Year,DOY,Sno_Height_M) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="snow-data-assignment.html#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site =</span> name)</span>
+<span id="cb6-7"><a href="snow-data-assignment.html#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-8"><a href="snow-data-assignment.html#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="snow-data-assignment.html#cb6-9" aria-hidden="true" tabindex="-1"></a>snow_data_full <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(snow_files,our_snow_reader)</span></code></pre></div>
+<pre><code>## Rows: 6211 Columns: 52
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (52): ArrayID, Year, DOY, Hour, LoAir_Min_C, LoAir_Min_Time, LoAir_Max_C...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## Rows: 6575 Columns: 48
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (48): ArrayID, Year, DOY, Hour, LoAir_Min_C, LoAir_Min_Time, LoAir_Max_C...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="snow-data-assignment.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(snow_data_full)</span></code></pre></div>
+<pre><code>##       Year           DOY         Sno_Height_M        site          
+##  Min.   :2003   Min.   :  1.0   Min.   :-3.523   Length:12786      
+##  1st Qu.:2008   1st Qu.: 92.0   1st Qu.: 0.350   Class :character  
+##  Median :2012   Median :183.0   Median : 0.978   Mode  :character  
+##  Mean   :2012   Mean   :183.1   Mean   : 0.981                     
+##  3rd Qu.:2016   3rd Qu.:274.0   3rd Qu.: 1.520                     
+##  Max.   :2021   Max.   :366.0   Max.   : 2.905                     
+##                                 NA&#39;s   :4554</code></pre>
+</div>
+<div id="plot-snow-data" class="section level3 hasAnchor" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Plot snow data<a href="snow-data-assignment.html#plot-snow-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="snow-data-assignment.html#cb10-1" aria-hidden="true" tabindex="-1"></a>snow_yearly <span class="ot">&lt;-</span> snow_data_full <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="snow-data-assignment.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year,site) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="snow-data-assignment.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_height =</span> <span class="fu">mean</span>(Sno_Height_M,<span class="at">na.rm=</span>T))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;Year&#39;. You can override using the `.groups`
+## argument.</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="snow-data-assignment.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(snow_yearly,<span class="fu">aes</span>(<span class="at">x=</span>Year,<span class="at">y=</span>mean_height,<span class="at">color=</span>site)) <span class="sc">+</span> </span>
+<span id="cb12-2"><a href="snow-data-assignment.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-3"><a href="snow-data-assignment.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">theme_few</span>() <span class="sc">+</span> </span>
+<span id="cb12-4"><a href="snow-data-assignment.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  ggthemes<span class="sc">::</span><span class="fu">scale_color_few</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 2 rows containing missing values (geom_point).</code></pre>
+<p><img src="bookdownproj_files/figure-html/03%20plotting%20snow-1.png" width="672" /></p>
+</div>
+</div>
+<div id="extract-the-meteorological-data-urls.-here-we-want-you-to-use-the-rvest-package-to-get-the-urls-for-the-sasp-forcing-and-sbsp_forcing-meteorological-datasets." class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Extract the meteorological data URLs. Here we want you to use the <code>rvest</code> package to get the URLs for the <code>SASP forcing</code> and <code>SBSP_forcing</code> meteorological datasets.<a href="snow-data-assignment.html#extract-the-meteorological-data-urls.-here-we-want-you-to-use-the-rvest-package-to-get-the-urls-for-the-sasp-forcing-and-sbsp_forcing-meteorological-datasets." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="snow-data-assignment.html#cb14-1" aria-hidden="true" tabindex="-1"></a>site_url <span class="ot">&lt;-</span> <span class="st">&#39;https://snowstudies.org/archived-data/&#39;</span></span>
+<span id="cb14-2"><a href="snow-data-assignment.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="snow-data-assignment.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Read the web url</span></span>
+<span id="cb14-4"><a href="snow-data-assignment.html#cb14-4" aria-hidden="true" tabindex="-1"></a>webpage <span class="ot">&lt;-</span> <span class="fu">read_html</span>(site_url)</span>
+<span id="cb14-5"><a href="snow-data-assignment.html#cb14-5" aria-hidden="true" tabindex="-1"></a>weblinks<span class="ot">&lt;-</span>webpage <span class="sc">%&gt;%</span> <span class="co">#reuse web url and webpage from sample, using same name</span></span>
+<span id="cb14-6"><a href="snow-data-assignment.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">&#39;a&#39;</span>) <span class="sc">%&gt;%</span> <span class="co"># a indicates to take a node as a reference (using &#39;a&#39;) on the website</span></span>
+<span id="cb14-7"><a href="snow-data-assignment.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  .[<span class="fu">grepl</span>(<span class="st">&#39;forcing&#39;</span>,.)] <span class="sc">%&gt;%</span> <span class="co">#pattern matching &#39;.&#39; references the nodes found in &#39;a&#39;.</span></span>
+<span id="cb14-8"><a href="snow-data-assignment.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">&#39;href&#39;</span>) <span class="co">#remove reference line for html</span></span></code></pre></div>
+</div>
+<div id="webscraping-assignment" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Webscraping Assignment<a href="snow-data-assignment.html#webscraping-assignment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Download the meteorological data. Use the <code>download_file</code> and <code>str_split_fixed</code> commands to download the data and save it in your data folder. You can use a for loop or a map function.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="snow-data-assignment.html#cb15-1" aria-hidden="true" tabindex="-1"></a>?download.file <span class="co">#need url and destfile (where you want the file to go and how to name it)</span></span>
+<span id="cb15-2"><a href="snow-data-assignment.html#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="snow-data-assignment.html#cb15-3" aria-hidden="true" tabindex="-1"></a>split<span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(weblinks,<span class="st">&#39;/&#39;</span>,<span class="dv">8</span>) <span class="co">#finding our destfile names</span></span>
+<span id="cb15-4"><a href="snow-data-assignment.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-5"><a href="snow-data-assignment.html#cb15-5" aria-hidden="true" tabindex="-1"></a>splitdata<span class="ot">&lt;-</span>split[,<span class="dv">8</span>] <span class="sc">%&gt;%</span> <span class="co">#column 8 holds the names we want</span></span>
+<span id="cb15-6"><a href="snow-data-assignment.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">&#39;.txt&#39;</span>,<span class="st">&#39;&#39;</span>,.)  <span class="co"># helps us keep track of site names?</span></span>
+<span id="cb15-7"><a href="snow-data-assignment.html#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="snow-data-assignment.html#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="snow-data-assignment.html#cb15-9" aria-hidden="true" tabindex="-1"></a>filenames<span class="ot">&lt;-</span><span class="fu">paste0</span>(<span class="st">&#39;data/&#39;</span>,splitdata) <span class="co">#creating </span></span>
+<span id="cb15-10"><a href="snow-data-assignment.html#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="snow-data-assignment.html#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>){</span>
+<span id="cb15-12"><a href="snow-data-assignment.html#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">download.file</span>(weblinks[i],<span class="at">destfile =</span> filenames[i])</span>
+<span id="cb15-13"><a href="snow-data-assignment.html#cb15-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="data-download-1" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Data Download<a href="snow-data-assignment.html#data-download-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Custom function to read in the data and append a site column to the data.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="snow-data-assignment.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this code grabs the variable names from the metadata pdf file</span></span>
+<span id="cb16-2"><a href="snow-data-assignment.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdftools)</span>
+<span id="cb16-3"><a href="snow-data-assignment.html#cb16-3" aria-hidden="true" tabindex="-1"></a>headers <span class="ot">&lt;-</span> <span class="fu">pdf_text</span>(<span class="st">&#39;https://snowstudies.org/wp-content/uploads/2022/02/Serially-Complete-Metadata-text08.pdf&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="snow-data-assignment.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  readr<span class="sc">::</span><span class="fu">read_lines</span>(.) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="snow-data-assignment.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trimws</span>(.) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="snow-data-assignment.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split_fixed</span>(.,<span class="st">&#39;</span><span class="sc">\\</span><span class="st">.&#39;</span>,<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="snow-data-assignment.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  .[,<span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="snow-data-assignment.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  .[<span class="dv">1</span><span class="sc">:</span><span class="dv">26</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb16-9"><a href="snow-data-assignment.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>(<span class="at">side =</span> <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb16-10"><a href="snow-data-assignment.html#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="snow-data-assignment.html#cb16-11" aria-hidden="true" tabindex="-1"></a>weather_reader <span class="ot">&lt;-</span> <span class="cf">function</span>(filenames){</span>
+<span id="cb16-12"><a href="snow-data-assignment.html#cb16-12" aria-hidden="true" tabindex="-1"></a>  name<span class="ot">=</span><span class="fu">str_split_fixed</span>(filenames,<span class="st">&#39;/&#39;</span>,<span class="dv">2</span>)[,<span class="dv">2</span>] <span class="co">#finding files</span></span>
+<span id="cb16-13"><a href="snow-data-assignment.html#cb16-13" aria-hidden="true" tabindex="-1"></a>  name2<span class="ot">=</span><span class="fu">str_split_fixed</span>(filenames,<span class="st">&#39;/&#39;</span>,<span class="dv">4</span>)[,<span class="dv">2</span>] <span class="co">#finding site name</span></span>
+<span id="cb16-14"><a href="snow-data-assignment.html#cb16-14" aria-hidden="true" tabindex="-1"></a>  test<span class="ot">=</span><span class="fu">read.delim</span>(filenames,<span class="at">header=</span><span class="cn">FALSE</span>,<span class="at">sep =</span> <span class="st">&quot;&quot;</span>,<span class="at">col.names =</span> headers,<span class="at">skip=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-15"><a href="snow-data-assignment.html#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">14</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-16"><a href="snow-data-assignment.html#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">site=</span>name2) <span class="co">#adding column for site name</span></span>
+<span id="cb16-17"><a href="snow-data-assignment.html#cb16-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="extract-meterorological-data" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Extract meterorological data<a href="snow-data-assignment.html#extract-meterorological-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use the <code>map</code> function to read in both meteorological files. Display a summary of your tibble.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="snow-data-assignment.html#cb17-1" aria-hidden="true" tabindex="-1"></a>weather_data <span class="ot">&lt;-</span><span class="fu">map_dfr</span>(filenames,weather_reader) <span class="co">#runs function and saves it </span></span>
+<span id="cb17-2"><a href="snow-data-assignment.html#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="snow-data-assignment.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(weather_data)</span></code></pre></div>
+<pre><code>##       year          month             day             hour           minute 
+##  Min.   :2003   Min.   : 1.000   Min.   : 1.00   Min.   : 0.00   Min.   :0  
+##  1st Qu.:2005   1st Qu.: 3.000   1st Qu.: 8.00   1st Qu.: 5.75   1st Qu.:0  
+##  Median :2007   Median : 6.000   Median :16.00   Median :11.50   Median :0  
+##  Mean   :2007   Mean   : 6.472   Mean   :15.76   Mean   :11.50   Mean   :0  
+##  3rd Qu.:2009   3rd Qu.: 9.000   3rd Qu.:23.00   3rd Qu.:17.25   3rd Qu.:0  
+##  Max.   :2011   Max.   :12.000   Max.   :31.00   Max.   :23.00   Max.   :0  
+##      second  precip..kg.m.2.s.1. sw.down..W.m.2.     lw.down..W.m.2.  
+##  Min.   :0   Min.   :0.000e+00   Min.   :-9999.000   Min.   :-9999.0  
+##  1st Qu.:0   1st Qu.:0.000e+00   1st Qu.:   -3.510   1st Qu.:  173.4  
+##  Median :0   Median :0.000e+00   Median :   -0.344   Median :  231.4  
+##  Mean   :0   Mean   :3.838e-05   Mean   :-1351.008   Mean   :-1325.7  
+##  3rd Qu.:0   3rd Qu.:0.000e+00   3rd Qu.:  294.900   3rd Qu.:  272.2  
+##  Max.   :0   Max.   :6.111e-03   Max.   : 1341.000   Max.   :  365.8  
+##   air.temp..K.   windspeed..m.s.1.   relative.humidity.... pressure..Pa.  
+##  Min.   :242.1   Min.   :-9999.000   Min.   :  0.011       Min.   :63931  
+##  1st Qu.:265.8   1st Qu.:    0.852   1st Qu.: 37.580       1st Qu.:63931  
+##  Median :272.6   Median :    1.548   Median : 59.910       Median :65397  
+##  Mean   :272.6   Mean   : -790.054   Mean   : 58.891       Mean   :65397  
+##  3rd Qu.:279.7   3rd Qu.:    3.087   3rd Qu.: 81.600       3rd Qu.:66863  
+##  Max.   :295.8   Max.   :  317.300   Max.   :324.800       Max.   :66863  
+##  specific.humidity..g.g.1.     site          
+##  Min.   :0.000000          Length:138336     
+##  1st Qu.:0.001744          Class :character  
+##  Median :0.002838          Mode  :character  
+##  Mean   :0.003372                            
+##  3rd Qu.:0.004508                            
+##  Max.   :0.014780</code></pre>
+</div>
+</div>
+<div id="line-plot-of-mean-temperature" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Line plot of mean temperature<a href="snow-data-assignment.html#line-plot-of-mean-temperature" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Make a line plot of mean temp by year by site (using the <code>air temp [K]</code> variable). Is there anything suspicious in the plot? Adjust your filtering if needed.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="snow-data-assignment.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checking that we have data for both sites</span></span>
+<span id="cb19-2"><a href="snow-data-assignment.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(weather_data<span class="sc">$</span>site)</span></code></pre></div>
+<pre><code>## [1] &quot;SBB_SASP_Forcing_Data&quot; &quot;SBB_SBSP_Forcing_Data&quot;</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="snow-data-assignment.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filtering to take average temperature</span></span>
+<span id="cb21-2"><a href="snow-data-assignment.html#cb21-2" aria-hidden="true" tabindex="-1"></a>mean_temp_data<span class="ot">&lt;-</span>weather_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="snow-data-assignment.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year<span class="sc">&gt;</span><span class="dv">2003</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="snow-data-assignment.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(site,year) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="snow-data-assignment.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_temp=</span><span class="fu">mean</span>(air.temp..K.))</span>
+<span id="cb21-6"><a href="snow-data-assignment.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb21-7"><a href="snow-data-assignment.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_temp_data, <span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>mean_temp,<span class="at">color=</span>site))<span class="sc">+</span></span>
+<span id="cb21-8"><a href="snow-data-assignment.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb21-9"><a href="snow-data-assignment.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_few</span>()<span class="sc">+</span></span>
+<span id="cb21-10"><a href="snow-data-assignment.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&#39;Year&#39;</span>, <span class="at">y=</span> <span class="st">&#39;Mean Temp (K)&#39;</span>,</span>
+<span id="cb21-11"><a href="snow-data-assignment.html#cb21-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span> <span class="st">&#39;Mean Temperature by Year&#39;</span>)<span class="sc">+</span></span>
+<span id="cb21-12"><a href="snow-data-assignment.html#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb21-13"><a href="snow-data-assignment.html#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.box =</span> <span class="st">&quot;horizontal&quot;</span>)<span class="sc">+</span></span>
+<span id="cb21-14"><a href="snow-data-assignment.html#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">labels=</span> <span class="fu">c</span>(<span class="st">&quot;Swamp Angel Study Plot&quot;</span>,<span class="st">&quot;Senator Beck Study Plot&quot;</span>),</span>
+<span id="cb21-15"><a href="snow-data-assignment.html#cb21-15" aria-hidden="true" tabindex="-1"></a>                      <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;lavender&quot;</span>,<span class="st">&quot;skyblue2&quot;</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/03.1%20temp%20graph-1.png" width="672" />
+A: It is suspicious that the mean temp is so much lower in 2003. When looking at the 2003 data, we see we only have two months of temperature data, so i filtered 2003 out.</p>
+</div>
+<div id="monthly-average-temperatures" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Monthly average temperatures<a href="snow-data-assignment.html#monthly-average-temperatures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Write a function that makes line plots of monthly average temperature at each site for a given year. Use a for loop to make these plots for 2005 to 2010. Are monthly average temperatures at the Senator Beck Study Plot ever warmer than the Swamp Angel Study Plot?
+Hint: <a href="https://ggplot2.tidyverse.org/reference/print.ggplot.html" class="uri">https://ggplot2.tidyverse.org/reference/print.ggplot.html</a></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="snow-data-assignment.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#new data frame with monthly average temperature</span></span>
+<span id="cb22-2"><a href="snow-data-assignment.html#cb22-2" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2005</span><span class="sc">:</span><span class="dv">2010</span>)</span>
+<span id="cb22-3"><a href="snow-data-assignment.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="snow-data-assignment.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#this is what we want the function to do</span></span>
+<span id="cb22-5"><a href="snow-data-assignment.html#cb22-5" aria-hidden="true" tabindex="-1"></a>by_year<span class="ot">&lt;-</span> weather_data<span class="sc">%&gt;%</span></span>
+<span id="cb22-6"><a href="snow-data-assignment.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month,year,site) <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="snow-data-assignment.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">monthly_temp=</span><span class="fu">mean</span>(air.temp..K.)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="snow-data-assignment.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>month, <span class="at">y=</span>monthly_temp, <span class="at">color=</span>site))<span class="sc">+</span></span>
+<span id="cb22-9"><a href="snow-data-assignment.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb22-10"><a href="snow-data-assignment.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&#39;Month&#39;</span>, <span class="at">y=</span> <span class="st">&#39;Average Air Temperature (K)&#39;</span>)</span>
+<span id="cb22-11"><a href="snow-data-assignment.html#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="snow-data-assignment.html#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">#we want functions to pull from raw datasets!</span></span>
+<span id="cb22-13"><a href="snow-data-assignment.html#cb22-13" aria-hidden="true" tabindex="-1"></a>monthly_plots <span class="ot">&lt;-</span> <span class="cf">function</span>(weather_data,years){</span>
+<span id="cb22-14"><a href="snow-data-assignment.html#cb22-14" aria-hidden="true" tabindex="-1"></a>  by_year<span class="ot">&lt;-</span> weather_data<span class="sc">%&gt;%</span></span>
+<span id="cb22-15"><a href="snow-data-assignment.html#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yr<span class="sc">==</span>year) <span class="sc">%&gt;%</span></span>
+<span id="cb22-16"><a href="snow-data-assignment.html#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month,year,site) <span class="sc">%&gt;%</span></span>
+<span id="cb22-17"><a href="snow-data-assignment.html#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">monthly_temp=</span><span class="fu">mean</span>(air.temp..K.)) </span>
+<span id="cb22-18"><a href="snow-data-assignment.html#cb22-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-19"><a href="snow-data-assignment.html#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">#plot</span></span>
+<span id="cb22-20"><a href="snow-data-assignment.html#cb22-20" aria-hidden="true" tabindex="-1"></a>  plots<span class="ot">&lt;-</span>(<span class="fu">ggplot</span>(by_year, <span class="fu">aes</span>(<span class="at">x=</span>month, <span class="at">y=</span>monthly_temp, <span class="at">color=</span>site))<span class="sc">+</span></span>
+<span id="cb22-21"><a href="snow-data-assignment.html#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb22-22"><a href="snow-data-assignment.html#cb22-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_few</span>()<span class="sc">+</span></span>
+<span id="cb22-23"><a href="snow-data-assignment.html#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_few</span>()<span class="sc">+</span></span>
+<span id="cb22-24"><a href="snow-data-assignment.html#cb22-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">&#39;Month&#39;</span>,</span>
+<span id="cb22-25"><a href="snow-data-assignment.html#cb22-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">&#39;Average Air Temperature (K)&#39;</span>,</span>
+<span id="cb22-26"><a href="snow-data-assignment.html#cb22-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span>by_year<span class="sc">$</span>year))<span class="sc">+</span></span>
+<span id="cb22-27"><a href="snow-data-assignment.html#cb22-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb22-28"><a href="snow-data-assignment.html#cb22-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.box =</span> <span class="st">&quot;horizontal&quot;</span>)</span>
+<span id="cb22-29"><a href="snow-data-assignment.html#cb22-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-30"><a href="snow-data-assignment.html#cb22-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(plots)</span>
+<span id="cb22-31"><a href="snow-data-assignment.html#cb22-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-32"><a href="snow-data-assignment.html#cb22-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-33"><a href="snow-data-assignment.html#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="co">#looping to plot                         </span></span>
+<span id="cb22-34"><a href="snow-data-assignment.html#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (yr <span class="cf">in</span> years){</span>
+<span id="cb22-35"><a href="snow-data-assignment.html#cb22-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">monthly_plots</span>(weather_data,years)</span>
+<span id="cb22-36"><a href="snow-data-assignment.html#cb22-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/03.1%20monthly%20avg%20function-1.png" width="672" /><img src="bookdownproj_files/figure-html/03.1%20monthly%20avg%20function-2.png" width="672" /><img src="bookdownproj_files/figure-html/03.1%20monthly%20avg%20function-3.png" width="672" /><img src="bookdownproj_files/figure-html/03.1%20monthly%20avg%20function-4.png" width="672" /><img src="bookdownproj_files/figure-html/03.1%20monthly%20avg%20function-5.png" width="672" /><img src="bookdownproj_files/figure-html/03.1%20monthly%20avg%20function-6.png" width="672" />
+A: No, Senator Beck Study Plot is never warmer than the Swamp Angel Study Plot during this time period.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="hayman-fire-recovery.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lagos-spatial-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/meggivarnai/Data_Science_Portfolio/edit/master/03-index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/meggivarnai/Data_Science_Portfolio/blob/master/03-index.Rmd",
+"text": null
+},
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

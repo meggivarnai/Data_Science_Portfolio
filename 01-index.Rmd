@@ -1,6 +1,8 @@
-# Poudre River Dishcarge Example
+# Poudre River Dishcarge 
 
-```{r setup, include=FALSE}
+This assignment is primarily demonstrating RMarkdown techniques and examples of different visualization methods. 
+
+```{r 01 library, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
@@ -12,7 +14,6 @@ library(xts)
     
 [Presentation View](https://meggivarnai.github.io/1_rmarkdown_examples/index_talk.html)
 
-
 ## Cache la Poudre River
 
 ![](https://waterdata.usgs.gov/nwisweb/local/state/co/text/pics/06752260big.jpg)
@@ -21,24 +22,11 @@ library(xts)
 The [name we know today](https://history.fcgov.com/explore/poudre-river) originated in the late 1800s when french trappers found themselves stranded in the canyon and and 'cached' some supplies, including gunpowder, till the spring. **"Cache la Poudre" is french for "where the powder is hidden"**. Read the [full article](https://www.raftmw.com/whats-in-a-name/) of the many names the river was called over the centuries. 
 
 
-## Methods
-
-The Poudre River at Lincoln Bridge is:
-
-  - Downstream of only a little bit of urban stormwater
-
-  - Near Odell Brewing CO
-  
-  - Near an open space area and the Poudre River Trail
-  
-  - **Downstream of many agricultral diversions**
-
 ## Data Acquisition and Plotting tests
 
-## Data Download
+Data Download
 
-
-```{r downloader}
+```{r 01 downloader}
 
 q <- readNWISdv(siteNumbers = '06752260',
                 parameterCd = '00060',
@@ -48,11 +36,10 @@ q <- readNWISdv(siteNumbers = '06752260',
 
 ```
 
+Static Data Plotter
 
-## Static Data Plotter
-
-```{r, warning = FALSE, fig.width = 8, fig.height = 5}
-
+```{r 01 plotter, warning = FALSE, fig.width = 8, fig.height = 5}
+#plot using ggplot package
 ggplot(q, aes(x = Date, y = q)) + 
   geom_line() + 
   ylab('Q (cfs)') + 
@@ -60,36 +47,22 @@ ggplot(q, aes(x = Date, y = q)) +
 
 ```
 
+Interactive Data Plotter
 
-## Interactive Data Plotter
-
-
-```{r}
-#format data for dygraph to understand. can find in 'help' 
-
+```{r 01 interactive plotter}
+#formating data for dygraph to understand 
 q_xts <- xts(q$q, order.by = q$Date)
-
-
+#plotting
 dygraph(q_xts) %>%
   dyAxis("y", label = "Discharge (cfs)") 
 ```
 
+DyGraph example 
 
-
-## Assignment
-
-
-This assignment will be primarily about demonstrating some expertice in using
-RMarkdown, since we will be using Rmds as the primary form of homework and 
-assignments. 
-
-## DyGraph example. 
-
-```{r}
+```{r 01 dygraph}
 dygraph(q_xts) %>%
   dyAxis("y", label = "Discharge (cfs)") %>%
   dyOptions(drawPoints = TRUE, pointSize = 2)
-
 ```
 
 

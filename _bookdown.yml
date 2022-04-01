@@ -1,14 +1,23 @@
 book_filename: "bookdownproj"
-output_dir: docs
 delete_merged_file: true
 edit: https://github.com/meggivarnai/Data_Science_Portfolio/edit/master/%s
 view: https://github.com/meggivarnai/Data_Science_Portfolio/blob/master/%s
 language:
   ui:
-    chapter_name: "Chapter"
-always_allow_html: true
-#new_session: no
+    chapter_name: "Chapter "
+    before_chapter_script: "rscripts/before_chapter.r"
 
 rmd_files:
   - "index.Rmd"
   - "01-index.Rmd"
+  - "02-index.Rmd"
+  - "03-index.Rmd"
+  - "04-index1.Rmd"
+  - "05-index2.Rmd"
+  - "06-index.Rmd"
+ 
+ 
+  
+output_dir: docs
+always_allow_html: true
+new_session: no

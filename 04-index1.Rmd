@@ -1,12 +1,4 @@
----
-title: "LAGOS Spatial Analysis"
-author: "Meggi Varnai"
-date: "`r format(Sys.Date(), '%B %d, %Y')`"
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-
+# LAGOS Spatial Analysis
 
 
 ```{r setup, include=FALSE}
@@ -21,13 +13,7 @@ library(ggpubr)
 ```
 
 
-# LAGOS Analysis
-
-
-## Loading in data
-
-
-### First download and then specifically grab the locus (or site lat longs)
+First download and then specifically grab the locus (or site lat longs)
 
 ```{r data-read, warning=FALSE}
 # #Lagos download script
@@ -42,9 +28,8 @@ lake_centers <- lagos$locus
 ```
 
 
-
-### Convert to spatial data
-```{r}
+Convert to spatial data
+```{r 04 convert to spatial }
 #Look at the column names
 #names(lake_centers)
 
@@ -70,10 +55,9 @@ mapview(subset_spatial)
 
 ```
 
+Subset to only Minnesota
 
-### Subset to only Minnesota
-
-```{r}
+```{r, 04 subsetting}
 states <- us_states()
 
 #Plot all the states to check if they loaded
@@ -92,14 +76,11 @@ minnesota_lakes %>%
   mapview(.,zcol = 'lake_area_ha')
 ```
 
+## Map
 
+Show a map outline of Iowa and Illinois (similar to Minnesota map upstream).
 
-# In-Class work
-
-
-## 1) Show a map outline of Iowa and Illinois (similar to Minnesota map upstream)
-
-```{r}
+```{r 04 mapping}
 #filtering out the states of interest
 Iowa <- states %>%
   filter(name == 'Iowa') %>%
@@ -115,10 +96,9 @@ mapview(maps)
 ```
 
 
+### Subset LAGOS data to these sites, how many sites are in Illinois and Iowa combined? How does this compare to Minnesota?
 
-## 2) Subset LAGOS data to these sites, how many sites are in Illinois and Iowa combined? How does this compare to Minnesota?
-
-```{r}
+```{r 04 lake id}
 iowa_lakes<-spatial_lakes[Iowa,]
 
 illinois_lakes <- spatial_lakes[Illinois,]
@@ -126,12 +106,10 @@ illinois_lakes <- spatial_lakes[Illinois,]
 ```
 A: There are 4,644 lakes in Iowa, and 11,822 lakes in Illinois for a combined total of 16,466 lakes. Minnesota has 29,038 lakes, almost double the amount in Iowa and Illinois. 
 
-## 3) What is the distribution of lake size in Iowa vs. Minnesota?
-
-- Here I want to see a histogram plot with lake size on x-axis and frequency on 
-y axis (check out geom_histogram)
+### What is the distribution of lake size in Iowa vs. Minnesota?
 
 ```{r}
+#histogram plot with lake size on x-axis and frequency on y axis
 iowa_size <- iowa_lakes %>%
   ggplot(aes(x=lake_area_ha))+
   geom_histogram(bins=20,
@@ -142,7 +120,7 @@ iowa_size <- iowa_lakes %>%
   theme_few()+
   labs(x= 'Area (ha)', y= 'Count',title="Iowa Lake Size Histogram")
 
-illinois_size <- illinois_lakes %>%
+minnesota_size <- minnesota_lakes %>%
   ggplot(aes(x=lake_area_ha))+
   geom_histogram(bins=20,
                  fill="cadetblue3",
@@ -150,15 +128,18 @@ illinois_size <- illinois_lakes %>%
                  alpha=0.5)+
   scale_x_log10()+
   theme_few()+
-  labs(x= 'Area (ha)', y= 'Count',title="Illinois Lake Size Histogram")
+  labs(x= 'Area (ha)', y= 'Count',title="Minnesota Lake Size Histogram")
 
-ggarrange(iowa_size,illinois_size, ncol=1, nrow=2)
+#presentig data
+ggarrange(iowa_size,minnesota_size, ncol=1, nrow=2)
 ```
 
+## Interactive Maps
 
-## 4) Make an interactive plot of lakes in Iowa and Illinois and color them by lake area in hectares
+Make an interactive plot of lakes in Iowa and Illinois and color them by lake area in hectares
 
 ```{r}
+#combining datasets
 Iowa_Illinois_lakes <- rbind(iowa_lakes,illinois_lakes) 
 
 Iowa_Illinois_lakes %>%
@@ -169,7 +150,7 @@ Iowa_Illinois_lakes %>%
 ```
 
 
-## 5) What other data sources might we use to understand how reservoirs and natural lakes vary in size in these three states? 
+### What other data sources might we use to understand how reservoirs and natural lakes vary in size in these three states? 
 
 A: A dataset with lake depths would be beneficial when looking at lake size. This could potentially include the maximum, minimum, and average depth and would give us better information to the volume these lakes hold. 
 

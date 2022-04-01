@@ -1,9 +1,6 @@
----
-title: "Weather and Corn Yield Regressions"
-author: "Meggi Varnai"
-date: "`r format(Sys.Date(), '%B %d, %Y')`"
-output: html_document
----
+# Weather and Corn Yield Regressions
+
+Investigating data using regressions. 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -14,7 +11,7 @@ library(rnassqs) #allows us to download from NASS directly
 
 ## Weather Data Analysis
 
-### Load the PRISM daily maximum temperatures
+Load the PRISM daily maximum temperatures
 
 ```{r tmax data, warning=FALSE, message=FALSE}
 
@@ -53,7 +50,7 @@ tmaxdf <- tibble(tmaxdf)
 
 ## Temperature trends
 
-### Summer temperature trends: Winneshiek County
+Summer temperature trends: Winneshiek County
 
 ```{r temp trends, message=FALSE}
 
@@ -76,7 +73,7 @@ summary(lm_summertmax)
 
 ```
 
-### Winter Temperatures - Winneshiek County
+Winter Temperatures - Winneshiek County
 
 ```{r winter temps,message=FALSE}
 
@@ -114,7 +111,7 @@ ggplot(winnewinter) +
 
 ```
 
-### Download NASS corn yield data
+## Download NASS corn yield data
 
 ```{r yield download, message=FALSE, results='hide'}
 
@@ -137,9 +134,9 @@ cornyields <- tibble(cornyields)
 
 ```
 
-## Assignment
+## Analysis
 
-### Question 1a: Extract Winneshiek County corn yields, fit a linear time trend, make a plot. Is there a significant time trend?
+### Extract Winneshiek County corn yields, fit a linear time trend, make a plot. Is there a significant time trend?
 
 ```{r}
 #extract county yeild
@@ -159,7 +156,7 @@ ggplot(winneyield)+
 A:Looking at our p-value (1.767 e-13), there is evidence of a significant time trend. The estimated slope is an increase of 2.457 yield per year, and our adjusted R-squared value shows us that about 75% of the data fit this model. 
 
 
-### Question 1b: Fit a quadratic time trend (i.e., year + year^2) and make a plot. Is there evidence for slowing yield growth? 
+### Fit a quadratic time trend (i.e., year + year^2) and make a plot. Is there evidence for slowing yield growth? 
 
 ```{r}
 winneyield$yearsq <-winneyield$year^2
@@ -175,7 +172,8 @@ ggplot(winneyield)+
 
 A: The p-value (2.311e-12) is less than alpha (0.05), indicating there is evidence of a relationship between years an yield growth. Based off the graph and our quadratic model, there is a slight slope of 7.641e-03, there is no evidence of a slowing yield growth. 
 
-### Question 2 -- Time Series: Let's analyze the relationship between temperature and yields for the Winneshiek County time series. Use data on yield and summer avg Tmax. Is adding year or Tmax^2 to your model helpful? Make a plot and interpret the results.
+### Time Series
+Let's analyze the relationship between temperature and yields for the Winneshiek County time series. Use data on yield and summer avg Tmax. Is adding year or Tmax^2 to your model helpful? Make a plot and interpret the results.
 
 ```{r, message=FALSE}
 #bringing summer temp into yield
@@ -194,7 +192,8 @@ ggplot(winnecorn)+
 
 A: When adding a quadratic model that considers temperature, our p-value (0.007887) is less than alpha and we have evidence of a relationship. We can see that our yield is highest with and average temperature between 26-27 °C, and yield decrease with higher or lower than those temperatures. This model is beneficial for seeing the effects of temperature on yield, even though our r squared value is 0.198. 
 
-### Question 3 -- Cross-Section: Analyze the relationship between temperature and yield across all counties in 2018. Is there a relationship? Interpret the results.
+### Cross-Section
+Analyze the relationship between temperature and yield across all counties in 2018. Is there a relationship? Interpret the results.
 
 ```{r}
 #pulling out relevant temp 
@@ -233,7 +232,8 @@ ggplot(iowa_2018)+
 
 A: Our linear model has a p-value of 0.06308 which is greater than alpha =0.05 and therefore there is no evidence of a relationship between yield and temperature between counties. However, when we ran a quadratic model, our p-value (0.001736) is less than alpha = 0.05, and our r squared is higher than the linear model. We see the highest yield had an average temperature between 27-29°C. 
 
-### Question 4 -- Panel: One way to leverage multiple time series is to group all data into what is called a "panel" regression. Convert the county ID code ("countyfp" or "county_ansi") into factor using as.factor, then include this variable in a regression using all counties' yield and summer temperature data. How does the significance of your temperature coefficients (Tmax, Tmax^2) change? Make a plot comparing actual and fitted yields and interpret the results of your model.
+### Panel
+One way to leverage multiple time series is to group all data into what is called a "panel" regression. Convert the county ID code ("countyfp" or "county_ansi") into factor using as.factor, then include this variable in a regression using all counties' yield and summer temperature data. How does the significance of your temperature coefficients (Tmax, Tmax^2) change? Make a plot comparing actual and fitted yields and interpret the results of your model.
 
 ```{r, message=FALSE}
 #filtering all counties summer temps
@@ -274,7 +274,8 @@ ggplot(panel_data)+
 A: The significance of the temperature coefficients (meantmax and tempsq) can be determined using the p-value. In this model, both values are smaller than 2e-16, so we cannot determine if there is a change between the two temperature coefficients. When comparing the actual and fitted yields, we have evidence of a relationship due to the p-value being 2.2e-16, less than alpha= 0.05. Having an r-squared value that fits 71% of the data shows us that all of the independent variables support this model. 
 
 
-### Question 5 -- Soybeans: Download NASS data on soybean yields and explore either a time series relationship for a given county, the cross-sectional relationship for a given year, or a panel across all counties and years.
+## Further Exploration
+Download NASS data on soybean yields and explore either a time series relationship for a given county, the cross-sectional relationship for a given year, or a panel across all counties and years.
 
 ```{r, results='hide'}
 # parameters to query 
@@ -304,11 +305,5 @@ ggplot(Buena_Vista_yield)+
   geom_line(mapping= aes(x=year, y=fitted))+
   labs(x='year', y='yield')
 
-
 ```
 
-
-### Bonus: Find a package to make a county map of Iowa displaying some sort of information about yields or weather. Interpret your map.
-
-
-### Bonus #2: Challenge question - map trends in corn yields by county across Iowa. Interpret your map.
